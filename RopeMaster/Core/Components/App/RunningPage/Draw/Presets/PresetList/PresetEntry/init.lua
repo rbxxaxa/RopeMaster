@@ -243,7 +243,7 @@ function PresetEntry:render()
 														BackgroundTransparency = 1,
 														Size = UDim2.new(1, 0, 1, 0),
 														Position = UDim2.new(0, 2, 0, 2),
-														Image = "rbxtemp://0",
+														Image = "rbxassetid://3670819736",
 														ImageColor3 = Color3.new(0, 0, 0),
 														ImageTransparency = 0.25
 													}
@@ -254,7 +254,7 @@ function PresetEntry:render()
 														BackgroundTransparency = 1,
 														Size = UDim2.new(1, 0, 1, 0),
 														Position = UDim2.new(0, 0, 0, 0),
-														Image = "rbxtemp://0",
+														Image = "rbxassetid://3670819736",
 														ImageColor3 = state.dotState == "Default" and entryTheme.dotColor.Default or entryTheme.dotColor.Hovered,
 														ZIndex = 2
 													}
