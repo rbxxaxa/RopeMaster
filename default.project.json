@@ -1,9 +1,9 @@
 {
-  "name": "Sisyphus Simulator",
+  "name": "RopeMaster",
   "tree": {
     "$className": "DataModel",
-    "StarterGui": {
-      "$className": "StarterGui",
+    "ServerStorage": {
+      "$className": "ServerStorage",
       "RopeMaster": {
         "$className": "Folder",
         "$path": "RopeMaster",
