@@ -1,0 +1,17 @@
+{
+  "name": "Sisyphus Simulator",
+  "tree": {
+    "$className": "DataModel",
+    "StarterGui": {
+      "$className": "StarterGui",
+      "RopeMaster": {
+        "$className": "Folder",
+        "$path": "RopeMaster",
+        "InstanceStorage": {
+          "$className": "Folder",
+          "$ignoreUnknownInstances": true
+        }
+      }
+    }
+  }
+}
