@@ -35,7 +35,8 @@ ThemedTextButton.defaultProps = {
 	buttonStyle = "Default",
 	modalIndex = 0,
 	slice = "Center",
-	ignoreSliceLine = ""
+	ignoreSliceLine = "",
+	disabled = false
 }
 
 function ThemedTextButton:render()

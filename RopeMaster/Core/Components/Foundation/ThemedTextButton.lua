@@ -58,7 +58,8 @@ function ThemedTextButton:render()
 					ZIndex = ZIndex,
 					selected = selected,
 					modalIndex = modalIndex,
-					onClick = onClick
+					onClick = onClick,
+					disabled = disabled
 				},
 				{
 					Text = Roact.createElement(

@@ -24,7 +24,8 @@ ThemedTextButton.defaultProps = {
 	Font = Constants.FONT,
 	TextSize = Constants.FONT_SIZE_MEDIUM,
 	modalIndex = 0,
-	iconStyle = "Top"
+	iconStyle = "Top",
+	disabled = false
 }
 
 function ThemedTextButton:render()
@@ -155,7 +156,8 @@ function ThemedTextButton:render()
 					ZIndex = ZIndex,
 					selected = selected,
 					modalIndex = modalIndex,
-					onClick = onClick
+					onClick = onClick,
+					disabled = false
 				},
 				buttonChildren
 			)
