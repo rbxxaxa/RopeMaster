@@ -8,7 +8,6 @@ local Constants = {}
 
 Constants.DEBUG_LABEL = "RopeMaster"
 Constants.PLUGIN_MIN_WIDTH = 320
-Constants.PLUGIN_MAX_WIDTH = 600
 Constants.TOOLBAR_ICON = "rbxassetid://3578081823"
 Constants.MAIN_ICON = "rbxassetid://0"
 Constants.PLUGIN_PRODUCT_ID = 3585926833
