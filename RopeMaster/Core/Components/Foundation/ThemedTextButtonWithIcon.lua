@@ -6,84 +6,51 @@ local Roact = require(Libs.Roact)
 local Constants = require(Plugin.Core.Util.Constants)
 local ContextHelper = require(Plugin.Core.Util.ContextHelper)
 local Utility = require(Plugin.Core.Util.Utility)
+local GetTextSize = Utility.GetTextSize
 
 local withTheme = ContextHelper.withTheme
 
 local Components = Plugin.Core.Components
 local Foundation = Components.Foundation
-local RoundedBorderedFrame = require(Foundation.RoundedBorderedFrame)
-local StatefulButtonDetector = require(Foundation.StatefulButtonDetector)
+local ThemedButton = require(Foundation.ThemedButton)
 
-local ThemedTextButtonWithIcon = Roact.PureComponent:extend("ThemedTextButtonWithIcon")
+local ThemedTextButton = Roact.PureComponent:extend("ThemedTextButton")
 
-function ThemedTextButtonWithIcon:init()
-	self:setState(
-		{
-			buttonState = "Default"
-		}
-	)
-
-	self.onStateChanged = function(s)
-		self:setState {buttonState = s}
-	end
-end
-
-ThemedTextButtonWithIcon.defaultProps = {
-	iconStyle = "Top",
-	modalIndex = 0
+ThemedTextButton.defaultProps = {
+	Position = UDim2.new(0, 0, 0, 0),
+	Size = UDim2.new(0, 100, 0, 100),
+	buttonStyle = "Default",
+	TextWrapped = false,
+	Font = Constants.FONT,
+	TextSize = Constants.FONT_SIZE_MEDIUM,
+	modalIndex = 0,
+	iconStyle = "Top"
 }
 
-function ThemedTextButtonWithIcon:render()
+function ThemedTextButton:render()
 	local props = self.props
-	local Position = props.Position or UDim2.new(0, 0, 0, 0)
+	local Position = props.Position
 	local AnchorPoint = props.AnchorPoint
-	local Size = props.Size or UDim2.new(0, 100, 0, 100)
+	local Size = props.Size
 	local onClick = props.onClick
 	local Text = props.Text
 	local LayoutOrder = props.LayoutOrder
-	local buttonStyle = props.buttonStyle or "Default"
-	local TextWrapped = props.TextWrapped or false
-	local selected = props.selected
+	local buttonStyle = props.buttonStyle
+	local TextWrapped = props.TextWrapped
 	local TextXAlignment = props.TextXAlignment
 	local TextYAlignment = props.TextYAlignment
 	local disabled = props.disabled
-	local Font = props.Font or Constants.FONT
-	local TextSize = props.TextSize or Constants.FONT_SIZE_MEDIUM
+	local Font = props.Font
+	local TextSize = props.TextSize
 	local ZIndex = props.ZIndex
+	local selected = props.selected
+	local modalIndex = props.modalIndex
 	local icon = props.icon
 	local iconStyle = props.iconStyle
 
 	return withTheme(
 		function(theme)
 			local buttonTheme = theme.button
-
-			local boxState
-			local buttonState = self.state.buttonState
-
-			if disabled then
-				boxState = "Disabled"
-			elseif selected then
-				local map = {
-					Default = "Selected",
-					Hovered = "SelectedHovered",
-					PressedInside = "SelectedPressedInside",
-					PressedOutside = "SelectedPressedOutside"
-				}
-
-				boxState = map[buttonState]
-			else
-				local map = {
-					Default = "Default",
-					Hovered = "Hovered",
-					PressedInside = "PressedInside",
-					PressedOutside = "PressedOutside"
-				}
-
-				boxState = map[buttonState]
-			end
-
-			local borderColor = buttonTheme.box.borderColor[buttonStyle][boxState]
-			local backgroundColor = buttonTheme.box.backgroundColor[buttonStyle][boxState]
 			local textColor = not disabled and buttonTheme.textColor[buttonStyle] or buttonTheme.textColor.Disabled
 
 			local buttonChildren
@@ -120,7 +87,7 @@ function ThemedTextButtonWithIcon:render()
 					)
 				}
 			elseif iconStyle == "Left" then
-				local textWidth = Utility.GetTextSize(Text, TextSize, Font, Vector2.new(9999, 9999)).X
+				local textWidth = GetTextSize(Text, TextSize, Font, Vector2.new(9999, 9999)).X
 				buttonChildren = {
 					-- This wrapping frame is necessary. Otherwise, the frame inside the button will also be layouted.
 					Frame = Roact.createElement(
@@ -177,32 +144,23 @@ function ThemedTextButtonWithIcon:render()
 			else
 				error("Invalid iconStyle.")
 			end
+
 			return Roact.createElement(
-				RoundedBorderedFrame,
+				ThemedButton,
 				{
 					Size = Size,
-					BackgroundColor3 = backgroundColor,
-					BorderColor3 = borderColor,
 					Position = Position,
 					AnchorPoint = AnchorPoint,
 					LayoutOrder = LayoutOrder,
-					ZIndex = ZIndex
+					ZIndex = ZIndex,
+					selected = selected,
+					modalIndex = modalIndex,
+					onClick = onClick
 				},
-				{
-					Button = Roact.createElement(
-						StatefulButtonDetector,
-						{
-							Size = UDim2.new(1, 0, 1, 0),
-							onClick = onClick,
-							onStateChanged = self.onStateChanged,
-							modalIndex = props.modalIndex
-						},
-						buttonChildren
-					)
-				}
+				buttonChildren
 			)
 		end
 	)
 end
 
-return ThemedTextButtonWithIcon
+return ThemedTextButton

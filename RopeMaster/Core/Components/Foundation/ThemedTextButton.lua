@@ -10,22 +10,9 @@ local withTheme = ContextHelper.withTheme
 
 local Components = Plugin.Core.Components
 local Foundation = Components.Foundation
-local RoundedBorderedFrame = require(Foundation.RoundedBorderedFrame)
-local StatefulButtonDetector = require(Foundation.StatefulButtonDetector)
+local ThemedButton = require(Foundation.ThemedButton)
 
 local ThemedTextButton = Roact.PureComponent:extend("ThemedTextButton")
-
-function ThemedTextButton:init()
-	self:setState(
-		{
-			buttonState = "Default"
-		}
-	)
-
-	self.onStateChanged = function(s)
-		self:setState {buttonState = s}
-	end
-end
 
 ThemedTextButton.defaultProps = {
 	Position = UDim2.new(0, 0, 0, 0),
@@ -54,77 +41,40 @@ function ThemedTextButton:render()
 	local TextSize = props.TextSize
 	local ZIndex = props.ZIndex
 	local selected = props.selected
+	local modalIndex = props.modalIndex
 
 	return withTheme(
 		function(theme)
 			local buttonTheme = theme.button
-
-			local boxState
-			local buttonState = self.state.buttonState
-
-			if disabled then
-				boxState = "Disabled"
-			elseif selected then
-				local map = {
-					Default = "Selected",
-					Hovered = "SelectedHovered",
-					PressedInside = "SelectedPressedInside",
-					PressedOutside = "SelectedPressedOutside"
-				}
-
-				boxState = map[buttonState]
-			else
-				local map = {
-					Default = "Default",
-					Hovered = "Hovered",
-					PressedInside = "PressedInside",
-					PressedOutside = "PressedOutside"
-				}
-
-				boxState = map[buttonState]
-			end
-
-			local borderColor = buttonTheme.box.borderColor[buttonStyle][boxState]
-			local backgroundColor = buttonTheme.box.backgroundColor[buttonStyle][boxState]
 			local textColor = not disabled and buttonTheme.textColor[buttonStyle] or buttonTheme.textColor.Disabled
 
 			return Roact.createElement(
-				RoundedBorderedFrame,
+				ThemedButton,
 				{
 					Size = Size,
-					BackgroundColor3 = backgroundColor,
-					BorderColor3 = borderColor,
 					Position = Position,
 					AnchorPoint = AnchorPoint,
 					LayoutOrder = LayoutOrder,
-					ZIndex = ZIndex
+					ZIndex = ZIndex,
+					selected = selected,
+					modalIndex = modalIndex,
+					onClick = onClick
 				},
 				{
-					Button = Roact.createElement(
-						StatefulButtonDetector,
+					Text = Roact.createElement(
+						"TextLabel",
 						{
-							Size = UDim2.new(1, 0, 1, 0),
-							onClick = onClick,
-							onStateChanged = self.onStateChanged,
-							modalIndex = props.modalIndex
-						},
-						{
-							Text = Roact.createElement(
-								"TextLabel",
-								{
-									Size = UDim2.new(1, -10, 1, 0),
-									Position = UDim2.new(0, 5, 0, 0),
-									BackgroundTransparency = 1,
-									Text = Text,
-									TextColor3 = textColor,
-									Font = Font,
-									TextSize = TextSize,
-									TextXAlignment = TextXAlignment,
-									TextYAlignment = TextYAlignment,
-									TextWrapped = TextWrapped,
-									TextTruncate = Enum.TextTruncate.None
-								}
-							)
+							Size = UDim2.new(1, -10, 1, 0),
+							Position = UDim2.new(0, 5, 0, 0),
+							BackgroundTransparency = 1,
+							Text = Text,
+							TextColor3 = textColor,
+							Font = Font,
+							TextSize = TextSize,
+							TextXAlignment = TextXAlignment,
+							TextYAlignment = TextYAlignment,
+							TextWrapped = TextWrapped,
+							TextTruncate = Enum.TextTruncate.None
 						}
 					)
 				}
