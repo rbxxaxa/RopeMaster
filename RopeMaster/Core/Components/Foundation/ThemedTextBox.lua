@@ -130,14 +130,6 @@ function ThemedTextBox:init()
 		end
 	end
 
-	-- In the future, we might be able to implement shift selection here.
-	self.isShiftDown = false
-	self.onInputBegan = function(rbx, inputObject)
-	end
-
-	self.onInputEnded = function(rbx, inputObject)
-	end
-
 	self.clipperRef = Roact.createRef()
 	self.textboxRef = Roact.createRef()
 end
