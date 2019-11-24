@@ -33,7 +33,6 @@ function DropdownField:render()
 
 	local boxPadding = Constants.INPUT_FIELD_BOX_PADDING
 	local boxHeight = props.height or Constants.INPUT_FIELD_BOX_HEIGHT
-	local fontSize = Constants.FONT_SIZE_MEDIUM
 
 	return Roact.createElement(
 		LabeledFieldTemplate,
@@ -58,7 +57,6 @@ function DropdownField:render()
 					entryHeight = boxHeight,
 					Position = UDim2.new(0, boxPadding, 0.5, 0),
 					AnchorPoint = Vector2.new(0, 0.5),
-					TextSize = fontSize,
 					onSelected = onSelected,
 					enabled = enabled,
 					onOpen = props.onOpen,
