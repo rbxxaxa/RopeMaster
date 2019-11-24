@@ -7,7 +7,7 @@ local PreciseFrame = Roact.PureComponent:extend("PreciseFrame")
 
 function PreciseFrame:init()
 	self:setState {
-		isMouseInside = false
+		mouseInside = false
 	}
 
 	self.onMouseEnter = function(rbx, x, y)

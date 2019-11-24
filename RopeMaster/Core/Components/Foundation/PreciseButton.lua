@@ -9,7 +9,7 @@ local PreciseButton = Roact.PureComponent:extend("PreciseButton")
 
 function PreciseButton:init()
 	self:setState {
-		isMouseInside = false
+		mouseInside = false
 	}
 
 	self.onMouseMoved = function(rbx, x, y)
