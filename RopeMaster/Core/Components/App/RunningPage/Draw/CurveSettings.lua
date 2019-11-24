@@ -24,7 +24,6 @@ local CurveDropdown =
 	BaseDropdownField,
 	{
 		label = "Curve Type",
-		labelWidth = 120,
 		entries = {
 			{id = Types.Curve.CATENARY, text = "Catenary"},
 			{id = Types.Curve.LINE, text = "Line"},

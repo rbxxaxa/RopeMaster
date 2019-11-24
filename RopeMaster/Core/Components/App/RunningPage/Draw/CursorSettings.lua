@@ -85,7 +85,6 @@ function CursorSettings:render()
 				DropdownField,
 				{
 					label = "Lock To",
-					labelWidth = 120,
 					selectedId = lockTo,
 					entries = {
 						{id = Types.LockTo.NONE, text = "None"},
@@ -102,7 +101,6 @@ function CursorSettings:render()
 				CheckboxField,
 				{
 					label = "Ignore Rope?",
-					labelWidth = 120,
 					checked = ignoreRope,
 					LayoutOrder = 2,
 					onToggle = self.onIgnoreRopeToggled
@@ -113,7 +111,6 @@ function CursorSettings:render()
 					NumericalSliderField,
 					{
 						label = "Lock Distance",
-						labelWidth = 120,
 						value = lockDistance,
 						minValue = Constants.LOCK_DISTANCE_MIN,
 						maxValue = Constants.LOCK_DISTANCE_MAX,
@@ -128,7 +125,6 @@ function CursorSettings:render()
 					NumericalSliderField,
 					{
 						label = "Grid Size",
-						labelWidth = 120,
 						value = gridSize,
 						minValue = Constants.GRID_SIZE_MIN,
 						maxValue = Constants.GRID_SIZE_MAX,

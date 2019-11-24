@@ -10,7 +10,6 @@ local BaseDropdownField =
 	"BaseDropdownField",
 	DropdownField,
 	{
-		labelWidth = 120,
 		Visible = true
 	},
 	{

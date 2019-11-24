@@ -17,7 +17,6 @@ end
 
 function CheckboxField:render()
 	local props = self.props
-	local labelWidth = props.labelWidth
 	local label = props.label
 	local checked = props.checked
 	local LayoutOrder = props.LayoutOrder
@@ -25,14 +24,12 @@ function CheckboxField:render()
 	local onToggle = props.onToggle
 	local modalIndex = props.modalIndex
 
-	local boxPadding = Constants.INPUT_FIELD_BOX_PADDING
 	local boxHeight = Constants.INPUT_FIELD_BOX_HEIGHT
 
 	return Roact.createElement(
 		LabeledFieldTemplate,
 		{
 			label = label,
-			labelWidth = labelWidth,
 			LayoutOrder = LayoutOrder,
 			Visible = Visible
 		},
@@ -42,7 +39,7 @@ function CheckboxField:render()
 				{
 					checked = checked,
 					Size = UDim2.new(0, boxHeight, 0, boxHeight),
-					Position = UDim2.new(0, boxPadding, 0.5, 0),
+					Position = UDim2.new(0, 0, 0.5, 0),
 					AnchorPoint = Vector2.new(0, 0.5),
 					onToggle = onToggle,
 					modalIndex = modalIndex

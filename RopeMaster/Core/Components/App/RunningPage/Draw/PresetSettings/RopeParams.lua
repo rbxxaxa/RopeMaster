@@ -425,8 +425,6 @@ function RopeParams:render()
 						CheckboxField,
 						{
 							label = "Textured?",
-							indentLevel = 0,
-							labelWidth = 120,
 							checked = textured,
 							onToggle = self.onTextureToggled,
 							LayoutOrder = 2
@@ -437,8 +435,6 @@ function RopeParams:render()
 							TextField,
 							{
 								label = "Texture Id",
-								indentLevel = 0,
-								labelWidth = 120,
 								textInput = textureId,
 								newTextValidateCallback = self.textureIdValidateCallback,
 								onFocusLost = self.onFocusLostTextureId,

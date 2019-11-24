@@ -94,6 +94,7 @@ function MainTheme:_recalculateTheme()
 	-- nice
 	local mainTextColor = isDark and Color3.fromRGB(204, 204, 204) or Color3.fromRGB(51, 51, 51)
 	local disabledTextColor = isDark and Color3.fromRGB(85, 85, 85) or Color3.fromRGB(120, 120, 120)
+	local fieldTextColor = isDark and  Color3.fromRGB(170, 170, 170) or Color3.fromRGB(136, 136, 136)
 	local backgroundColor = isDark and Color3.fromRGB(46, 46, 46) or Color3.fromRGB(255, 255, 255)
 	local foregroundColor = isDark and Color3.fromRGB(53, 53, 53) or Color3.fromRGB(242, 242, 242)
 	local midgroundColor = foregroundColor:lerp(backgroundColor, 0.8)
@@ -157,7 +158,7 @@ function MainTheme:_recalculateTheme()
 			},
 			labeledField = {
 				textColor = {
-					Enabled = mainTextColor,
+					Enabled = fieldTextColor,
 					Disabled = disabledTextColor
 				},
 				arrowColor = mainTextColor

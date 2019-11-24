@@ -595,7 +595,6 @@ do
 						return Roact.createElement(
 							LabeledFieldTemplate,
 							{
-								labelWidth = 24,
 								label = label,
 								LayoutOrder = LayoutOrder
 							},

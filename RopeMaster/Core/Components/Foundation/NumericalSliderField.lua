@@ -20,7 +20,6 @@ end
 
 function NumericalSliderField:render()
 	local props = self.props
-	local labelWidth = props.labelWidth
 	local label = props.label
 	local LayoutOrder = props.LayoutOrder
 	local Visible = props.Visible
@@ -37,7 +36,6 @@ function NumericalSliderField:render()
 	local trucateTrailingZeroes = props.trucateTrailingZeroes
 	local modalIndex = props.modalIndex
 
-	local boxPadding = Constants.INPUT_FIELD_BOX_PADDING
 	local boxHeight = Constants.INPUT_FIELD_BOX_HEIGHT
 	local fontSize = Constants.FONT_SIZE_MEDIUM
 
@@ -45,7 +43,6 @@ function NumericalSliderField:render()
 		LabeledFieldTemplate,
 		{
 			label = label,
-			labelWidth = labelWidth,
 			LayoutOrder = LayoutOrder,
 			Visible = Visible,
 			forceShowHighlight = self.state.focused
@@ -54,8 +51,8 @@ function NumericalSliderField:render()
 			Slider = Roact.createElement(
 				ThemedNumericalSlider,
 				{
-					Size = UDim2.new(1, -boxPadding, 0, boxHeight),
-					Position = UDim2.new(0, boxPadding, 0.5, 0),
+					Size = UDim2.new(1, 0, 0, boxHeight),
+					Position = UDim2.new(0, 0, 0.5, 0),
 					AnchorPoint = Vector2.new(0, 0.5),
 					TextSize = fontSize,
 					textboxWidthPixel = textboxWidthPixel,

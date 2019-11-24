@@ -489,7 +489,6 @@ function CustomChainParams:render()
 							textFormatCallback = self.linkOffsetValidateCallback,
 							newTextValidateCallback = vector3ValidateCallback,
 							textInput = formatVector3(linkOffset.x, linkOffset.y, linkOffset.z),
-							labelWidth = 120
 						}
 					)
 				}

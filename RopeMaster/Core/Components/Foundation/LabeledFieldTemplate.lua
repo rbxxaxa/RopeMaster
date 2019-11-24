@@ -2,7 +2,6 @@ local Plugin = script.Parent.Parent.Parent.Parent
 
 local Libs = Plugin.Libs
 local Roact = require(Libs.Roact)
-local Utility = require(Plugin.Core.Util.Utility)
 
 local Constants = require(Plugin.Core.Util.Constants)
 local ContextHelper = require(Plugin.Core.Util.ContextHelper)
@@ -16,7 +15,6 @@ local PreciseFrame = require(Foundation.PreciseFrame)
 local LabeledFieldTemplate = Roact.PureComponent:extend("LabeledFieldTemplate")
 
 LabeledFieldTemplate.defaultProps = {
-	labelWidth = Constants.DEFAULT_LABEL_WIDTH
 }
 
 function LabeledFieldTemplate:render()
@@ -24,7 +22,6 @@ function LabeledFieldTemplate:render()
 	local LayoutOrder = props.LayoutOrder
 	local ZIndex = props.ZIndex
 	local label = props.label
-	local labelWidth = props.labelWidth
 	local Visible = props.Visible
 	local enabled = props.enabled ~= false
 
@@ -32,17 +29,15 @@ function LabeledFieldTemplate:render()
 		function(theme)
 			local fieldTheme = theme.labeledField
 			local fieldHeight = props.height or Constants.INPUT_FIELD_HEIGHT
-			local labelPadding = Constants.INPUT_FIELD_LABEL_PADDING
-			local fontSize = Constants.FONT_SIZE_MEDIUM
+			local fontSize = Constants.FONT_SIZE_SMALL
 			local font = Constants.FONT
 			local labelColor = enabled and fieldTheme.textColor.Enabled or fieldTheme.textColor.Disabled
-			local finalLabelWidth = labelWidth - labelPadding
-			local textFits = Utility.GetTextSize(label, fontSize, font, Vector2.new(9999, 9999)).X <= finalLabelWidth
+			local spacerHeight = 4
 
 			return Roact.createElement(
 				PreciseFrame,
 				{
-					Size = UDim2.new(1, 0, 0, fieldHeight),
+					Size = UDim2.new(1, 0, 0, fontSize+fieldHeight+spacerHeight),
 					BackgroundTransparency = 1,
 					LayoutOrder = LayoutOrder,
 					ZIndex = ZIndex,
@@ -52,15 +47,15 @@ function LabeledFieldTemplate:render()
 					Label = Roact.createElement(
 						"TextLabel",
 						{
-							Size = UDim2.new(0, finalLabelWidth, 0, fieldHeight),
+							Size = UDim2.new(1, 0, 0, fontSize),
 							BackgroundTransparency = 1,
 							TextColor3 = labelColor,
 							TextSize = fontSize,
-							TextTruncate = textFits and Enum.TextTruncate.None or Enum.TextTruncate.AtEnd,
+							TextTruncate = Enum.TextTruncate.None,
 							Font = font,
 							Text = label,
 							TextXAlignment = Enum.TextXAlignment.Left,
-							Position = UDim2.new(0, labelPadding, 0, 0),
+							Position = UDim2.new(0, 0, 0, 0),
 							ZIndex = 2
 						}
 					),
@@ -68,8 +63,8 @@ function LabeledFieldTemplate:render()
 						"Frame",
 						{
 							BackgroundTransparency = 1,
-							Size = UDim2.new(1, -labelWidth, 0, fieldHeight),
-							Position = UDim2.new(0, labelWidth, 0, 0),
+							Size = UDim2.new(1, 0, 0, fieldHeight),
+							Position = UDim2.new(0, 0, 0, fontSize+spacerHeight),
 							ZIndex = 2
 						},
 						props[Roact.Children]

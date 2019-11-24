@@ -10,7 +10,6 @@ local BaseNumericalSliderField =
 	"BaseNumericalSliderField",
 	NumericalSliderField,
 	{
-		labelWidth = 120,
 		Visible = true
 	},
 	{

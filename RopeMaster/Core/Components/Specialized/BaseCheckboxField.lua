@@ -10,7 +10,6 @@ local BaseCheckboxField =
 	"BaseCheckboxField",
 	CheckboxField,
 	{
-		labelWidth = 120,
 		Visible = true
 	},
 	{

@@ -28,7 +28,7 @@ function VerticalListSeparator:render()
 							{
 								BorderSizePixel = 0,
 								BackgroundColor3 = theme.separator.color,
-								Size = UDim2.new(1, -12, 0, 1),
+								Size = UDim2.new(1, 0, 0, 1),
 								AnchorPoint = Vector2.new(0.5, 0.5),
 								Position = UDim2.new(0.5, 0, 0.5, 0)
 							}
