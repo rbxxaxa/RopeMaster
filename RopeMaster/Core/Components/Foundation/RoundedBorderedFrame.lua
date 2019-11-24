@@ -19,6 +19,36 @@ BorderedFrame.defaultProps = {
 	borderStyle = "Round"
 }
 
+local rect_map = {
+	Center = {Vector2.new(0, 0), Vector2.new(10, 10), Rect.new(4, 4, 5, 5)},
+	Top = {Vector2.new(0, 0), Vector2.new(10, 5), Rect.new(4, 4, 5, 5)},
+	Bottom = {Vector2.new(0, 5), Vector2.new(10, 5), Rect.new(4, 0, 5, 1)},
+	Right = {Vector2.new(5, 0), Vector2.new(5, 10), Rect.new(0, 4, 1, 5)},
+	Left = {Vector2.new(0, 0), Vector2.new(5, 10), Rect.new(4, 4, 5, 5)},
+	TopRight = {Vector2.new(5, 0), Vector2.new(5, 5), Rect.new(0, 4, 0, 4)},
+	TopLeft = {Vector2.new(0, 0), Vector2.new(5, 5), Rect.new(4, 4, 4, 4)},
+	BottomLeft = {Vector2.new(0, 5), Vector2.new(5, 5), Rect.new(4, 0, 4, 0)},
+	BottomRight = {Vector2.new(5, 5), Vector2.new(5, 5), Rect.new(0, 0, 0, 0)}
+}
+
+local line_1_map = {
+	Top = {"Bottom", UDim2.new(1, 0, 0, 1), UDim2.new(0, 0, 1, -1)},
+	Bottom = {"Top", UDim2.new(1, 0, 0, 1), UDim2.new(0, 0, 0, 0)},
+	Left = {"Right", UDim2.new(0, 1, 1, 0), UDim2.new(1, -1, 0, 0)},
+	Right = {"Left", UDim2.new(0, 1, 1, 0), UDim2.new(0, 0, 0, 0)},
+	TopRight = {"Bottom", UDim2.new(1, 0, 0, 1), UDim2.new(0, 0, 1, -1)},
+	TopLeft = {"Bottom", UDim2.new(1, 0, 0, 1), UDim2.new(0, 0, 1, -1)},
+	BottomLeft = {"Top", UDim2.new(1, 0, 0, 1), UDim2.new(0, 0, 0, 0)},
+	BottomRight = {"Top", UDim2.new(1, 0, 0, 1), UDim2.new(0, 0, 0, 0)}
+}
+
+local line_2_map = {
+	TopRight = {"Left", UDim2.new(0, 1, 1, 0), UDim2.new(0, 0, 0, 0)},
+	TopLeft = {"Right", UDim2.new(0, 1, 1, 0), UDim2.new(1, -1, 0, 0)},
+	BottomLeft = {"Right", UDim2.new(0, 1, 1, 0), UDim2.new(1, -1, 0, 0)},
+	BottomRight = {"Left", UDim2.new(0, 1, 1, 0), UDim2.new(0, 0, 0, 0)}
+}
+
 function BorderedFrame:render()
 	local props = self.props
 	local BorderColor3 = props.BorderColor3
@@ -36,49 +66,21 @@ function BorderedFrame:render()
 	local ignoreSliceLine = props.ignoreSliceLine
 	local borderStyle = props.borderStyle
 
-	local map = {
-		Center = {Vector2.new(0, 0), Vector2.new(10, 10), Rect.new(4, 4, 5, 5)},
-		Top = {Vector2.new(0, 0), Vector2.new(10, 5), Rect.new(4, 4, 5, 5)},
-		Bottom = {Vector2.new(0, 5), Vector2.new(10, 5), Rect.new(4, 0, 5, 1)},
-		Right = {Vector2.new(5, 0), Vector2.new(5, 10), Rect.new(0, 4, 1, 5)},
-		Left = {Vector2.new(0, 0), Vector2.new(5, 10), Rect.new(4, 4, 5, 5)},
-		TopRight = {Vector2.new(5, 0), Vector2.new(5, 5), Rect.new(0, 4, 0, 4)},
-		TopLeft = {Vector2.new(0, 0), Vector2.new(5, 5), Rect.new(4, 4, 4, 4)},
-		BottomLeft = {Vector2.new(0, 5), Vector2.new(5, 5), Rect.new(4, 0, 4, 0)},
-		BottomRight = {Vector2.new(5, 5), Vector2.new(5, 5), Rect.new(0, 0, 0, 0)}
-	}
-
-	local ro, rs, sc = unpack(map[slice])
-
-	map = {
-		Top = {"Bottom", UDim2.new(1, 0, 0, 1), UDim2.new(0, 0, 1, -1)},
-		Bottom = {"Top", UDim2.new(1, 0, 0, 1), UDim2.new(0, 0, 0, 0)},
-		Left = {"Right", UDim2.new(0, 1, 1, 0), UDim2.new(1, -1, 0, 0)},
-		Right = {"Left", UDim2.new(0, 1, 1, 0), UDim2.new(0, 0, 0, 0)},
-		TopRight = {"Bottom", UDim2.new(1, 0, 0, 1), UDim2.new(0, 0, 1, -1)},
-		TopLeft = {"Bottom", UDim2.new(1, 0, 0, 1), UDim2.new(0, 0, 1, -1)},
-		BottomLeft = {"Top", UDim2.new(1, 0, 0, 1), UDim2.new(0, 0, 0, 0)},
-		BottomRight = {"Top", UDim2.new(1, 0, 0, 1), UDim2.new(0, 0, 0, 0)}
-	}
+	local ro, rs, sc = unpack(rect_map[slice])
 
 	local s, ls_1, lp_1
-	if map[slice] then
-		s, ls_1, lp_1 = unpack(map[slice])
+	local line_1_entry = line_1_map[slice]
+	if line_1_entry then
+		s, ls_1, lp_1 = unpack(line_1_entry)
 		if ignoreSliceLine == s then
 			ls_1, lp_1 = nil, nil
 		end
 	end
 
-	map = {
-		TopRight = {"Left", UDim2.new(0, 1, 1, 0), UDim2.new(0, 0, 0, 0)},
-		TopLeft = {"Right", UDim2.new(0, 1, 1, 0), UDim2.new(1, -1, 0, 0)},
-		BottomLeft = {"Right", UDim2.new(0, 1, 1, 0), UDim2.new(1, -1, 0, 0)},
-		BottomRight = {"Left", UDim2.new(0, 1, 1, 0), UDim2.new(0, 0, 0, 0)}
-	}
-
 	local ls_2, lp_2
-	if map[slice] then
-		s, ls_2, lp_2 = unpack(map[slice])
+	local line_2_entry = line_2_map[slice]
+	if line_2_entry then
+		s, ls_2, lp_2 = unpack(line_2_entry)
 		if ignoreSliceLine == s then
 			ls_2, lp_2 = nil, nil
 		end
