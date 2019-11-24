@@ -232,6 +232,7 @@ function ThemedTextBox:render()
 							Input = Roact.createElement(
 								"TextBox",
 								{
+									-- Size and Position is set by UpdateTextBoxProperties
 									BackgroundTransparency = 1,
 									Font = font,
 									TextSize = TextSize,
