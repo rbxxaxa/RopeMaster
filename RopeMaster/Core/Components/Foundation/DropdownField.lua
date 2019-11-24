@@ -17,7 +17,6 @@ end
 
 function DropdownField:render()
 	local props = self.props
-	local indentLevel = props.indentLevel
 	local labelWidth = props.labelWidth
 	local label = props.label
 	local LayoutOrder = props.LayoutOrder
@@ -40,7 +39,6 @@ function DropdownField:render()
 		LabeledFieldTemplate,
 		{
 			label = label,
-			indentLevel = indentLevel,
 			labelWidth = labelWidth,
 			LayoutOrder = LayoutOrder,
 			Visible = Visible,

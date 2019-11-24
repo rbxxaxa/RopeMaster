@@ -16,7 +16,6 @@ local PreciseFrame = require(Foundation.PreciseFrame)
 local LabeledFieldTemplate = Roact.PureComponent:extend("LabeledFieldTemplate")
 
 LabeledFieldTemplate.defaultProps = {
-	indentLevel = 0,
 	labelWidth = Constants.DEFAULT_LABEL_WIDTH
 }
 
@@ -25,7 +24,6 @@ function LabeledFieldTemplate:render()
 	local LayoutOrder = props.LayoutOrder
 	local ZIndex = props.ZIndex
 	local label = props.label
-	local indentLevel = props.indentLevel
 	local labelWidth = props.labelWidth
 	local Visible = props.Visible
 	local enabled = props.enabled ~= false
@@ -34,14 +32,11 @@ function LabeledFieldTemplate:render()
 		function(theme)
 			local fieldTheme = theme.labeledField
 			local fieldHeight = props.height or Constants.INPUT_FIELD_HEIGHT
-			local perLevelIndent = Constants.INPUT_FIELD_INDENT_PER_LEVEL
 			local labelPadding = Constants.INPUT_FIELD_LABEL_PADDING
 			local fontSize = Constants.FONT_SIZE_MEDIUM
 			local font = Constants.FONT
 			local labelColor = enabled and fieldTheme.textColor.Enabled or fieldTheme.textColor.Disabled
-			local totalIndent = perLevelIndent * (indentLevel)
-			local width = labelWidth - totalIndent
-			local finalLabelWidth = width - labelPadding
+			local finalLabelWidth = labelWidth - labelPadding
 			local textFits = Utility.GetTextSize(label, fontSize, font, Vector2.new(9999, 9999)).X <= finalLabelWidth
 
 			return Roact.createElement(
@@ -65,7 +60,7 @@ function LabeledFieldTemplate:render()
 							Font = font,
 							Text = label,
 							TextXAlignment = Enum.TextXAlignment.Left,
-							Position = UDim2.new(0, totalIndent + labelPadding, 0, 0),
+							Position = UDim2.new(0, labelPadding, 0, 0),
 							ZIndex = 2
 						}
 					),

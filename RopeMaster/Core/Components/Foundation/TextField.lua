@@ -17,7 +17,6 @@ end
 
 function TextField:render()
 	local props = self.props
-	local indentLevel = props.indentLevel
 	local labelWidth = props.labelWidth
 	local textInput = props.textInput
 	local label = props.label
@@ -41,7 +40,6 @@ function TextField:render()
 		LabeledFieldTemplate,
 		{
 			label = label,
-			indentLevel = indentLevel,
 			labelWidth = labelWidth,
 			LayoutOrder = LayoutOrder,
 			Visible = Visible,
