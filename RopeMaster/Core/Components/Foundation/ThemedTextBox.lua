@@ -152,7 +152,9 @@ ThemedTextBox.defaultProps = {
 	Position = UDim2.new(0, 0, 0, 0),
 	TextSize = Constants.FONT_SIZE_MEDIUM,
 	Size = UDim2.new(1, 0, 0, Constants.INPUT_FIELD_BOX_HEIGHT),
-	textInput = ""
+	textInput = "",
+	slice = "Center",
+	ignoreSliceLine = ""
 }
 
 function ThemedTextBox:render()
@@ -165,6 +167,8 @@ function ThemedTextBox:render()
 	local placeholderText = props.placeholderText
 	local textFormatCallback = props.textFormatCallback
 	local inputBoxSizeOffset = props.inputBoxSizeOffset
+	local slice = props.slice
+	local ignoreSliceLine = props.ignoreSliceLine
 
 	return withTheme(
 		function(theme)
@@ -259,7 +263,9 @@ function ThemedTextBox:render()
 							BackgroundColor3 = backgroundColor,
 							BorderColor3 = borderColor,
 							Position = Position,
-							AnchorPoint = AnchorPoint
+							AnchorPoint = AnchorPoint,
+							slice = slice,
+							ignoreSliceLine = ignoreSliceLine,
 						},
 						children
 					)

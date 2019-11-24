@@ -33,7 +33,9 @@ ThemedTextButton.defaultProps = {
 	Position = UDim2.new(0, 0, 0, 0),
 	Size = UDim2.new(0, 100, 0, 100),
 	buttonStyle = "Default",
-	modalIndex = 0
+	modalIndex = 0,
+	slice = "Center",
+	ignoreSliceLine = ""
 }
 
 function ThemedTextButton:render()
@@ -47,6 +49,8 @@ function ThemedTextButton:render()
 	local disabled = props.disabled
 	local ZIndex = props.ZIndex
 	local selected = props.selected
+	local slice = props.slice
+	local ignoreSliceLine = props.ignoreSliceLine
 
 	return withTheme(
 		function(theme)
@@ -89,7 +93,9 @@ function ThemedTextButton:render()
 					Position = Position,
 					AnchorPoint = AnchorPoint,
 					LayoutOrder = LayoutOrder,
-					ZIndex = ZIndex
+					ZIndex = ZIndex,
+					slice = slice,
+					ignoreSliceLine = ignoreSliceLine
 				},
 				{
 					Button = Roact.createElement(
