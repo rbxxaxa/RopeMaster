@@ -297,7 +297,13 @@ function ThemedTextBox:UpdateTextBoxProperties()
 	else
 		size = UDim2.new(0, textWidth, 1, 0)
 	end
-	local textBeforeCursor = string.sub(text, 1, cursorPosition - 1)
+	local textBeforeCursor do
+		if cursorPosition == -1 then
+			textBeforeCursor = ""
+		else
+			textBeforeCursor = string.sub(text, 1, cursorPosition - 1)
+		end
+	end
 	local cursorPositionX = Utility.GetTextSize(textBeforeCursor, textsize, font, Vector2.new(9999, 9999)).X
 	if textWidth > boxWidth then
 		if textboxPosX + cursorPositionX > boxWidth then

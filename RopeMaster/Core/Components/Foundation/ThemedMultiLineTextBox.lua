@@ -309,7 +309,9 @@ function ThemedMultiLineTextBox:UpdateTextBoxProperties()
 	local lines = string.split(text, "\n")
 	local current_pos = 1
 	local textBeforeCursor, textAfterCursor do
-		if cursorPosition >= #text then
+		if cursorPosition == -1 then
+			textBeforeCursor, textAfterCursor = "", text
+		elseif cursorPosition >= #text then
 			textBeforeCursor = lines[#lines]
 			textAfterCursor = ""
 		else
